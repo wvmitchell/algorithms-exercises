@@ -11,13 +11,35 @@
 */
 
 function bubbleSort(nums) {
-  // code goes here
+  let swapped = false
+  let neededLength = nums.length
+
+  do {
+    swapped = false
+    for(var i = 0; i < neededLength; i++) {
+      let [a, b] = [nums[i], nums[i+1]]
+
+      if(a > b) {
+        [nums[i], nums[i+1]]= [b, a]
+        swapped = true
+      }
+    }
+    neededLength--
+  } while(swapped)
+
+  return nums
 }
 
 // unit tests
 // do not modify the below code
-test.skip("bubble sort", function () {
+test("bubble sort", function () {
   const nums = [10, 5, 3, 8, 2, 6, 4, 7, 9, 1];
   const sortedNums = bubbleSort(nums);
   expect(sortedNums).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 });
+
+test.skip("bubble sort in worst case with massive array", function () {
+  const nums = [...Array(30000).keys()].reverse();
+  const sortedNums = bubbleSort(nums);
+  expect(sortedNums).toEqual([...Array(30000).keys()]);
+})
