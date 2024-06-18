@@ -17,13 +17,44 @@
   you work
 */
 
-class ArrayList {
-  // code goes here
+function ArrayList() {
+  this.list = {};
+  this.length = 0;
 }
+
+ArrayList.prototype.push = function (element) {
+  this.list[this.length] = element;
+  this.length++;
+};
+
+ArrayList.prototype.pop = function () {
+  var element = this.list[this.length - 1];
+  delete this.list[this.length - 1];
+  this.length--;
+  return element;
+};
+
+ArrayList.prototype.get = function (index) {
+  return this.list[index];
+};
+
+ArrayList.prototype.delete = function (index) {
+  var element = this.get(index);
+  this._collapseTo(index);
+  return element;
+};
+
+ArrayList.prototype._collapseTo = function (index) {
+  for (var i = index; i < this.length; i++) {
+    this.list[i] = this.list[i + 1];
+  }
+  delete this.list[this.length - 1];
+  this.length--;
+};
 
 // unit tests
 // do not modify the below code
-describe.skip("ArrayList", function () {
+describe("ArrayList", function () {
   const range = (length) =>
     Array.apply(null, { length: length }).map(Number.call, Number);
   const abcRange = (length) =>
