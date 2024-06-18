@@ -4,16 +4,50 @@
 // it's up to you what to return if the object isn't found (we're not testing that)
 
 function linearSearch(id, array) {
-  // code goes here
+  // iterate through entire array
+  // when you encounter the object with the id you're looking for, return it
+  // if you don't encounter it, return null
+  for (let obj of array) {
+    if (obj.id == id) {
+      return obj;
+    }
+  }
+  return void 0;
 }
 
 function binarySearch(id, array) {
-  // code goes here
+  // set three pointers: right, mid, and left
+  // left starts at 0, mid a array length / 2, and right at array length - 1
+  // while left < right
+  // if id at mid is the object, return it
+  // if the id at mid is greater than id
+  // set right to mid
+  // if id at mid is less than id
+  // set left to mid
+  // set mid to left + (right - left) / 2
+  // if loop ends without returning a middle, then return null
+  let left = 0;
+  let mid = Math.floor(array.length / 2);
+  let right = array.length - 1;
+
+  while (left < right) {
+    let middle = array[mid];
+    if (id == middle.id) {
+      return middle;
+    } else if (id > middle.id) {
+      left = mid;
+    } else {
+      right = midd;
+    }
+    mid = left + Math.floor((right - left) / 2);
+  }
+
+  return void 0;
 }
 
 // unit tests
 // do not modify the below code
-test.skip("linear search", function () {
+test("linear search", function () {
   const lookingFor = { id: 5, name: "Brian" };
   expect(
     linearSearch(5, [
@@ -30,12 +64,12 @@ test.skip("linear search", function () {
       { id: 2, name: "Marc" },
       { id: 51, name: "Chris" },
       lookingFor,
-      { id: 14, name: "Ben" }
-    ])
+      { id: 14, name: "Ben" },
+    ]),
   ).toBe(lookingFor);
 });
 
-test.skip("binary search", function () {
+test("binary search", function () {
   const lookingFor = { id: 23, name: "Brian" };
   expect(
     binarySearch(23, [
@@ -52,7 +86,7 @@ test.skip("binary search", function () {
       { id: 19, name: "Marc" },
       { id: 21, name: "Chris" },
       lookingFor,
-      { id: 24, name: "Ben" }
-    ])
+      { id: 24, name: "Ben" },
+    ]),
   ).toBe(lookingFor);
 });
