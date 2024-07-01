@@ -103,12 +103,6 @@ class Node {
         this.left.left = leftBefore;
         this.left.value = valueBefore;
 
-        // let [a, b, c] = [this, this.right, this.right.right];
-        // [a.value, b.value] = [b.value, a.value];
-        // a.left = b;
-        // a.right = c;
-        // [b.left, a.left] = [b.right, b.left];
-
         this.left && this.left.updateInNewLocation();
         this.updateInNewLocation();
     }
@@ -122,12 +116,6 @@ class Node {
         this.right.left = this.right.right;
         this.right.right = rightBefore;
         this.right.value = valueBefore;
-
-        // let [a, b, c] = [this, this.left, this.left.left];
-        // [a.value, b.value] = [b.value, a.value];
-        // a.right = b;
-        // a.left = c;
-        // [b.right, a.right] = [b.left, b.right];
 
         this.right && this.right.updateInNewLocation();
         this.updateInNewLocation();
